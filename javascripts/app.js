@@ -9,6 +9,7 @@ var rover = {
 console.log("This is the initial direction " + rover.direction);
 console.log("This is the initial position " + rover.position);
 
+var ostias = rover.travelLog;
 // ======================
 function turnLeft(rover){
   //console.log("turnLeft was called!");
@@ -72,16 +73,21 @@ function moveForward(rover){
     for (var i = 0; i < str.length; i++){
       //console.log(str[i]);
       if(str[i] === "f"){
-        //console.log("Lets move forward the rover!");
+        console.log(i);
+        console.log(str[i]);
+        console.log("Move forward");
         moveForward(rover);
-        rover.travelLog.push([rover.position]);
+        console.log( "P " + rover.position);
+        ostias.push(rover.position);
+        console.log( ostias);
+        
       }
       else if(str[i] === "r"){
-        //console.log("Lets turn right the rover!");
+        console.log("Turn right");
         turnRight(rover);
       }
       else if (str[i] === "l"){
-        //console.log("Lets turn left the rover!");
+        console.log("Turn left");
         turnLeft(rover);
       }
       else{
@@ -90,10 +96,10 @@ function moveForward(rover){
       
     }
    
-  for (var key in rover.travelLog){
+  /*for (var travelLog in rover){
     // recordName is a **key** in the object
-    console.log("travelLog: " + rover.travelLog[key]);
-  }
+    console.log("Ey " + roverTravelLog);
+  }*/
 
     console.log("This is the final direction " + rover.direction);
     console.log( "This is the final position " + rover.position);

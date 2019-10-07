@@ -2,12 +2,14 @@
 // ======================
 var rover = {
   direction: "N",
-  position: [0,0],
+  x: 0,
+  y: 0,
   travelLog: [[0,0]]
 } 
 
+var travelLogArray = rover.travelLog;
 console.log("This is the initial direction " + rover.direction);
-console.log("This is the initial position " + rover.position);
+console.log("This is the initial position " + rover.x + "," + rover.y);
 
 var ostias = rover.travelLog;
 // ======================
@@ -26,6 +28,10 @@ function turnLeft(rover){
     case "E":
       rover.direction = "N";
       break;
+    default:
+      rover.direction = "W";
+      break;
+
   }
   //console.log(rover.direction);
 }
@@ -45,6 +51,9 @@ function turnRight(rover){
     case "W":
       rover.direction = "N";
       break;
+    default:
+      rover.direction = "E";
+      break;
   }
   //console.log(rover.direction);
 }
@@ -52,16 +61,24 @@ function turnRight(rover){
 function moveForward(rover){
   switch (rover.direction) {
     case "N":
-      rover.position[1] = rover.position[1]- 1;
+      rover.y--;
+      console.log( "x " + rover.x);
+      console.log( "y " + rover.y);
       break;
     case "W":
-      rover.position[0] = rover.position[0]- 1;
+      rover.x--;
+      console.log( "x " + rover.x);
+      console.log( "y " + rover.y);
       break;
     case "S":
-      rover.position[1] = rover.position[1]+ 1;
+        rover.y++;
+        console.log( "x " + rover.x);
+         console.log( "y " + rover.y);
       break;
     case "E":
-      rover.position[0] = rover.position[0]+ 1;
+        rover.x++;
+        console.log( "x " + rover.x);
+        console.log( "y " + rover.y);
       break;
     }
     //console.log(rover.position);
@@ -73,14 +90,12 @@ function moveForward(rover){
     for (var i = 0; i < str.length; i++){
       //console.log(str[i]);
       if(str[i] === "f"){
-        console.log(i);
-        console.log(str[i]);
+        //console.log(i);
+        //console.log(str[i]);
         console.log("Move forward");
         moveForward(rover);
-        console.log( "P " + rover.position);
-        ostias.push(rover.position);
-        console.log( ostias);
-        
+        travelLogArray.push([rover.x,rover.y]);
+        
       }
       else if(str[i] === "r"){
         console.log("Turn right");
@@ -93,19 +108,15 @@ function moveForward(rover){
       else{
         console.log("Not a valid command");
       }
-      
+    ;
     }
-   
-  /*for (var travelLog in rover){
-    // recordName is a **key** in the object
-    console.log("Ey " + roverTravelLog);
-  }*/
 
+  
     console.log("This is the final direction " + rover.direction);
-    console.log( "This is the final position " + rover.position);
-    console.log( "This is travelLog " + rover.travelLog);
-    console.log(rover["travelLog"].length);
-    console.log(rover);
+  
+    console.log( "This is the final x " + rover.x);
+    console.log( "This is the final y " + rover.y);
+    console.log(rover.travelLog)
     }
     
 commandList("rffrfflfrff");

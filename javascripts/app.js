@@ -10,6 +10,7 @@ var rover = {
 var travelLogArray = rover.travelLog;
 console.log("This is the initial direction " + rover.direction);
 console.log("This is the initial position " + rover.x + "," + rover.y);
+console.log("----------");
 
 var ostias = rover.travelLog;
 // ======================
@@ -111,12 +112,10 @@ function moveForward(rover){
     ;
     }
 
-  
+    console.log("----------");
     console.log("This is the final direction " + rover.direction);
-  
-    console.log( "This is the final x " + rover.x);
-    console.log( "This is the final y " + rover.y);
-    console.log(rover.travelLog)
+    console.log("This is the final position " + rover.x +  "," + rover.y);
+    console.log(travelLogArray);
     }
     
 commandList("rffrfflfrff");

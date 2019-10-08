@@ -10,9 +10,8 @@ var rover = {
 var travelLogArray = rover.travelLog;
 console.log("This is the initial direction " + rover.direction);
 console.log("This is the initial position " + rover.x + "," + rover.y);
-console.log("----------");
+console.log("\n* * * * * * \n* * * * * *");
 
-var ostias = rover.travelLog;
 // ======================
 function turnLeft(rover){
   //console.log("turnLeft was called!");
@@ -62,42 +61,115 @@ function turnRight(rover){
 function moveForward(rover){
   switch (rover.direction) {
     case "N":
-      rover.y--;
-      console.log( "x " + rover.x);
-      console.log( "y " + rover.y);
+        if (rover.y > 0){
+          rover.y--;
+        }
+        else{
+          console.log("You can't go outside!");
+        }
+        console.log( "x " + rover.x);
+        console.log( "y " + rover.y);
       break;
     case "W":
-      rover.x--;
+      if (rover.x > 0 ){
+        rover.x--;
+      }
+      else{
+        console.log("You can't go outside!");
+      }
       console.log( "x " + rover.x);
-      console.log( "y " + rover.y);
+      console.log( "y " + rover.y);
+     
       break;
     case "S":
-        rover.y++;
+        if (rover.y < 9){
+          rover.y++;
+        }
+        else{
+          console.log("You can't go outside!");
+        }
         console.log( "x " + rover.x);
-         console.log( "y " + rover.y);
+        console.log( "y " + rover.y);
       break;
     case "E":
-        rover.x++;
+        if (rover.x < 9){
+          rover.x++;
+        }
+        else{
+          console.log("You can't go outside!");
+        }
         console.log( "x " + rover.x);
-        console.log( "y " + rover.y);
+        console.log( "y " + rover.y);
+       
       break;
     }
-    //console.log(rover.position);
   }
+
+  function moveBackward(rover){
+    switch (rover.direction) {
+      case "N":
+          if (rover.y < 9){
+            rover.y++;
+          }
+          else{
+            console.log("You can't go outside!");
+          }
+          console.log( "x " + rover.x);
+          console.log( "y " + rover.y);
+        break;
+      case "W":
+        if (rover.x < 9 ){
+          rover.x++;
+        }
+        else{
+          console.log("You can't go outside!");
+        }
+        console.log( "x " + rover.x);
+        console.log( "y " + rover.y);
+       
+        break;
+      case "S":
+          if (rover.y > 0){
+            rover.y--;
+          }
+          else{
+            console.log("You can't go outside!");
+          }
+          console.log( "x " + rover.x);
+          console.log( "y " + rover.y);
+        break;
+      case "E":
+          if (rover.x > 0){
+            rover.x--;
+          }
+          else{
+            console.log("You can't go outside!");
+          }
+          console.log( "x " + rover.x);
+          console.log( "y " + rover.y);
+         
+        break;
+      }
+    }
+
 
 
   function commandList(str){
-    console.log("This is the command to execute " + str);
+    console.log("This is the command to execute: " + str);
     for (var i = 0; i < str.length; i++){
       //console.log(str[i]);
       if(str[i] === "f"){
         //console.log(i);
         //console.log(str[i]);
-        console.log("Move forward");
+        console.log("Move forward"); 
         moveForward(rover);
-        travelLogArray.push([rover.x,rover.y]);
-        
+        travelLogArray.push([rover.x,rover.y]); 
       }
+      else if(str[i] === "b"){
+        console.log("Move backward");
+        moveBackward(rover);
+        travelLogArray.push([rover.x,rover.y]);
+      }
       else if(str[i] === "r"){
         console.log("Turn right");
         turnRight(rover);
@@ -112,10 +184,22 @@ function moveForward(rover){
     ;
     }
 
-    console.log("----------");
+    console.log("\n* * * * * * \n* * * * * *");
     console.log("This is the final direction " + rover.direction);
     console.log("This is the final position " + rover.x +  "," + rover.y);
+    console.log("This is the path:");
     console.log(travelLogArray);
     }
     
-commandList("rffrfflfrff");
+
+function testMarsRover(str){
+  commandList(str);
+}
+/*1st test: moving the rover*/
+//testMarsRover("rffrfflfrff");
+
+/*2nd test: moving inside the 10x10 grid*/
+//testMarsRover("rffffffffffrffffffffffrffffffffffrffffffffff");
+
+/*3rd test: moving inside the 10x10 grid and moving backward*/
+testMarsRover("rffffffffffrbfffrfffffffffflbbb");

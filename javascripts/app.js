@@ -8,13 +8,14 @@ var rover = {
 } 
 
 var travelLogArray = rover.travelLog;
-console.log("This is the initial direction " + rover.direction);
-console.log("This is the initial position " + rover.x + "," + rover.y);
-console.log("\n* * * * * * \n* * * * * *");
+//console.log("This is the initial direction " + rover.direction);
+//console.log("This is the initial position " + rover.x + "," + rover.y);
+//console.log("\n* * * * * * \n* * * * * *");
 
 // ======================
 function turnLeft(rover){
   //console.log("turnLeft was called!");
+  /* turns to the left in base of the current direction of the rover*/
   switch (rover.direction) {
     case "N":
       rover.direction = "W";
@@ -38,6 +39,7 @@ function turnLeft(rover){
 
 function turnRight(rover){
   //console.log("turnRigth was called!");
+  /* turns to the rigth in base of the current direction of the rover*/
   switch (rover.direction) {
     case "N":
       rover.direction = "E";
@@ -59,6 +61,7 @@ function turnRight(rover){
 }
 
 function moveForward(rover){
+  /* says how to move in base of the current direction of the rover and the 10x10 grid*/
   switch (rover.direction) {
     case "N":
         if (rover.y > 0){
@@ -106,6 +109,7 @@ function moveForward(rover){
   }
 
   function moveBackward(rover){
+    /* says how to move in base of the current direction of the rover and the 10x10 grid*/
     switch (rover.direction) {
       case "N":
           if (rover.y < 9){
@@ -152,10 +156,9 @@ function moveForward(rover){
       }
     }
 
-
-
   function commandList(str){
     console.log("This is the command to execute: " + str);
+    /* says when and what kind of movement execute in base of the commandList str and push the resultant position to the travelLog*/
     for (var i = 0; i < str.length; i++){
       //console.log(str[i]);
       if(str[i] === "f"){
@@ -192,8 +195,30 @@ function moveForward(rover){
     }
     
 
+  var validCommands = ["f", "b", "l", "r"];
+  function validateStr (str){
+      /* puts every character of the str inside str [i] and looks for the index of this character inside the valid Commands array, if indexOf  is -1 It means the character doesn't exist in the array*/
+      for( let i = 0; i < str.length; i++){
+        //console.log("index del caracter " + str[i]);
+        //console.log("indexOf " + validCommands.indexOf(str[i]));
+        //console.log("comandos " + validCommands);
+      if (validCommands.indexOf(str[i]) == -1){
+          return false;
+          console.log("not valid str");
+      }
+    };
+    return true;
+    console.log("valid str");
+};
+  
 function testMarsRover(str){
-  commandList(str);
+  /* if the str validation is true, execute the commandList */
+  if(validateStr( str, validCommands)){
+      console.log('EXECUTE');
+      commandList(str);
+  } else {
+      console.log('Invalid command list');
+  }
 }
 /*1st test: moving the rover*/
 //testMarsRover("rffrfflfrff");
@@ -203,3 +228,7 @@ function testMarsRover(str){
 
 /*3rd test: moving inside the 10x10 grid and moving backward*/
 testMarsRover("rffffffffffrbfffrfffffffffflbbb");
+
+/*4th test: validate str*/
+//testMarsRover("rlbf");
+//testMarsRover("rlbfmn");
